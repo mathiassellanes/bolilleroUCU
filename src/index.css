@@ -1,0 +1,85 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bolillero {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100vh;
+}
+
+.bolillero__sorteado {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.bolillero__sorteado__text {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.sorteadas {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 0.3rem;
+}
+
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 1rem;
+}
+
+.tablero__sortear {
+  border: none;
+  background-color: #333;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+.bolilla {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: #333;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  transition: background-color 0.3s;
+}
+
+.bolilla--sorteada {
+  background-color: #f00;
+}
+
+.bolilla--chica {
+  width: 50px;
+  height: 50px;
+}
+
+.bolilla--grande {
+  width: 400px;
+  height: 400px;
+  font-size: 10rem;
+}
