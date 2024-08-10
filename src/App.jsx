@@ -33,10 +33,12 @@ function App() {
       handle()
     }
 
-    if (event.code === 'Escape') {
+    if (event.ctrlKey && event.key === 'x') {
       localStorage.removeItem('bolillasSorteadas')
       setBolillasSorteadas([])
       setBolillas(bolillasDefault)
+    } else if (event.ctrlKey && event.key === 'z') {
+      setClickEnabled(!clickEnabled)
     }
   }
 
@@ -101,7 +103,7 @@ function App() {
         >
           Sortear
         </button>
-        <label className="tablero__enable__click__label">
+        {/* <label className="tablero__enable__click__label">
           Habilitar click
           <input
             onClick={() => {
@@ -111,7 +113,7 @@ function App() {
             className="tablero__enable__click"
             type='checkbox'
           />
-        </label>
+        </label> */}
       </div>
     </div>
   )
