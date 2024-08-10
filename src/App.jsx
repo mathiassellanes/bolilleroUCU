@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 function App() {
   const [maxBolillas, setMaxBolillas] = useState(75)
 
+  const [clickEnabled, setClickEnabled] = useState(false)
+
   const bolillasDefault = Array.from({ length: maxBolillas }, (_, i) => i + 1)
 
   const [bolillasSorteadas, setBolillasSorteadas] = useState([localStorage.getItem('bolillasSorteadas') ? JSON.parse(localStorage.getItem('bolillasSorteadas')) : []].flat())
@@ -38,6 +40,23 @@ function App() {
     }
   }
 
+  const handleClickBolilla = (bolilla) => {
+    if (clickEnabled) {
+      const index = bolillasSorteadas.indexOf(bolilla)
+      if (index !== -1) {
+        const newBolillasSorteadas = bolillasSorteadas.filter((_, i) => i !== index)
+        localStorage.setItem('bolillasSorteadas', JSON.stringify(newBolillasSorteadas))
+        setBolillasSorteadas(newBolillasSorteadas)
+        setBolillas([...bolillas, bolilla])
+      } else {
+        const newBolillasSorteadas = [...bolillasSorteadas, bolilla]
+        localStorage.setItem('bolillasSorteadas', JSON.stringify(newBolillasSorteadas))
+        setBolillasSorteadas(newBolillasSorteadas)
+        setBolillas(bolillas.filter(bolillaFilter => bolillaFilter !== bolilla))
+      }
+    }
+  }
+
   useEffect(() => {
     window.addEventListener('keyup', handleKeyPress)
     return () => {
@@ -50,9 +69,14 @@ function App() {
       <div className="tablero">
         {
           bolillasDefault.map((bolilla, index) => (
-            <div key={index} className={classNames('bolilla', {
-              'bolilla--sorteada': bolillasSorteadas.includes(bolilla)
-            })}>
+            <div
+              key={index}
+              className={classNames('bolilla', {
+                'bolilla--sorteada': bolillasSorteadas.includes(bolilla),
+                'bolilla--click-enabled': clickEnabled,
+              })}
+              onClick={() => handleClickBolilla(bolilla)}
+            >
               {bolilla}
             </div>
           ))
@@ -77,6 +101,17 @@ function App() {
         >
           Sortear
         </button>
+        <label className="tablero__enable__click__label">
+          Habilitar click
+          <input
+            onClick={() => {
+              setClickEnabled(!clickEnabled)
+            }}
+            value={clickEnabled}
+            className="tablero__enable__click"
+            type='checkbox'
+          />
+        </label>
       </div>
     </div>
   )
